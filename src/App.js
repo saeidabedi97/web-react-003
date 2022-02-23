@@ -8,7 +8,7 @@ const fetchJSON = async (endpoint) =>
 
 const App = () => {
   const { data } = useSWR(LIST_ALL_BREEDS_ENDPOINT, fetchJSON);
-  // const [selectedBreed, setSelectedBreed] = useState();
+  const [selectedBreed, setSelectedBreed] = useState();
   const listOfBreeds = Object(data);
 
   return (
