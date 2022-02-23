@@ -1,25 +1,24 @@
-import logo from "./logo.svg";
+import React, { useState } from "react";
 import "./App.css";
 
-function App() {
+const InnerComponent = ({ value }) => <pre>{value}</pre>;
+const CounterButton = ({ onClick, children }) => (
+  <button onClick={onClick}>{children}</button>
+);
+
+const App = () => {
+  const [number, setNumber] = useState(0);
+  const [name, setName] = useState("");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CounterButton onClick={() => setNumber(number - 1)}>-</CounterButton>
+      <InnerComponent value={number} />
+      <CounterButton onClick={() => setNumber(number + 1)}>+</CounterButton>
+      <input value={name} onChange={(e) => setName(e.target.value)} />
+      <pre>{JSON.stringify({ number, name })}</pre>
     </div>
   );
-}
+};
 
 export default App;
