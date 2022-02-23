@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import useSWR from "swr";
 
-const LIST_ALL_BREEDS_ENDPOINT = "https://dog.ceo/api/breeds/list/all";
+const LIST_ALL_BREEDS_ENDPOINT =
+  "https://emojihub.herokuapp.com/api/random/group_face_positive";
 
 const fetchJSON = async (endpoint) =>
   await fetch(endpoint).then((x) => x.json());
@@ -9,9 +10,9 @@ const fetchJSON = async (endpoint) =>
 const App = () => {
   const { data } = useSWR(LIST_ALL_BREEDS_ENDPOINT, fetchJSON);
 
-  return <div>{JSON.stringify(data)}</div>;
+  return <pre>{JSON.stringify(data)}</pre>;
   // const [selectedBreed, setSelectedBreed] = useState(null);
-  // const listOfBreeds = Object.keys(DATA.message);
+  // const listOfBreeds = Object.keys(data.message);
   // return (
   //   <div>
   //     {selectedBreed}
@@ -23,7 +24,7 @@ const App = () => {
   //       ))}
   //     </ul>
   //   </div>
-  // );
+  //);
 };
 
 export default App;
