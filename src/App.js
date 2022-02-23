@@ -1,24 +1,29 @@
 import React, { useState } from "react";
-import "./App.css";
+import useSWR from "swr";
 
-const InnerComponent = ({ value }) => <pre>{value}</pre>;
-const CounterButton = ({ onClick, children }) => (
-  <button onClick={onClick}>{children}</button>
-);
+const LIST_ALL_BREEDS_ENDPOINT = "https://dog.ceo/api/breeds/list/all";
+
+const fetchJSON = async (endpoint) =>
+  await fetch(endpoint).then((x) => x.json());
 
 const App = () => {
-  const [number, setNumber] = useState(0);
-  const [name, setName] = useState("");
+  const { data } = useSWR(LIST_ALL_BREEDS_ENDPOINT, fetchJSON);
 
-  return (
-    <div className="App">
-      <CounterButton onClick={() => setNumber(number - 1)}>-</CounterButton>
-      <InnerComponent value={number} />
-      <CounterButton onClick={() => setNumber(number + 1)}>+</CounterButton>
-      <input value={name} onChange={(e) => setName(e.target.value)} />
-      <pre>{JSON.stringify({ number, name })}</pre>
-    </div>
-  );
+  return <div>{JSON.stringify(data)}</div>;
+  // const [selectedBreed, setSelectedBreed] = useState(null);
+  // const listOfBreeds = Object.keys(DATA.message);
+  // return (
+  //   <div>
+  //     {selectedBreed}
+  //     <ul>
+  //       {listOfBreeds.map((breed) => (
+  //         <li>
+  //           <button onClick={() => setSelectedBreed(breed)}>{breed}</button>
+  //         </li>
+  //       ))}
+  //     </ul>
+  //   </div>
+  // );
 };
 
 export default App;
