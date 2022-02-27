@@ -1,2 +1,7 @@
-export const sum = (a, b) => a + b;
-export const sumTenToArrayItems = (arr) => arr.map((x) => sum(x, 10));
+export const fetchJSON = async (endpoint) =>
+  await fetch(endpoint).then((x) => x.json());
+
+export const massageData = (data) => Object(data);
+
+export const LIST_ALL_BREEDS_ENDPOINT =
+  "https://emojihub.herokuapp.com/api/all";

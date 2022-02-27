@@ -1,44 +1,28 @@
-import React, { useState } from "react";
-import useSWR from "swr";
-
-const LIST_ALL_BREEDS_ENDPOINT = "https://emojihub.herokuapp.com/api/all";
-
-const fetchJSON = async (endpoint) =>
-  await fetch(endpoint).then((x) => x.json());
+import React, { useEffect, useState } from "react";
+import Inner from "./Inner";
+import { useGetAllBreeds } from "./useGetAllBreeds";
 
 const App = () => {
-  const { data } = useSWR(LIST_ALL_BREEDS_ENDPOINT, fetchJSON);
-  // const [listOfBreeds, setListOfBreeds] = useState(data);
-  const listOfBreeds = Object(data);
-  return (
-    <div>
-      {/* <pre>{JSON.stringify(listOfBreeds, null, 8)}</pre> */}
+  const [selectedBreed, setSelectedBreed] = useState(null);
+  const allBreeds = useGetAllBreeds();
 
-      {data
-        ? listOfBreeds.map((item) => {
-            return (
-              <div>
-                <table>
-                  <tr>
-                    <th>name</th>
-                    <th>category</th>
-                    <th>group</th>
-                    <th>htmlCode</th>
-                    <th>unicode</th>
-                  </tr>
-                  <tr>
-                    <td>{item.name}</td>
-                    <td>{item.category}</td>
-                    <td>{item.group}</td>
-                    <td>{item.htmlCode}</td>
-                    <td>{item.unicode}</td>
-                  </tr>
-                </table>
-              </div>
-            );
-          })
-        : "loading"}
-    </div>
+  useEffect(() => {
+    document.title = selectedBreed;
+  }, [selectedBreed]);
+
+  if (!allBreeds)
+    return (
+      <div data-testid="main">
+        <div data-testid="loading-state">loading</div>
+      </div>
+    );
+
+  return (
+    <Inner
+      allBreeds={allBreeds}
+      selectedBreed={selectedBreed}
+      setSelectedBreed={setSelectedBreed}
+    />
   );
 };
 

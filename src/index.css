@@ -1,16 +1,19 @@
-th,
-td {
-  border: 1px solid green;
-  border-radius: 5px;
-  padding: 15px;
+* {
+  box-sizing: border-box;
 }
 
-td {
-  background-color: lightblue;
-  font-family: "Segoe UI";
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
-table {
-  border-bottom: 5px solid red;
-  padding: 10px;
-  margin-left: 10px;
+#header {
+  padding: 50px;
+  background-color: lightblue;
+}
+.header-item {
+  padding: 50px;
+}
+.data {
+  border: 2px solid green;
+  padding: 50px;
 }
