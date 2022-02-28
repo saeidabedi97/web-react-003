@@ -7,4 +7,13 @@ describe("App", () => {
     render(<App />);
     expect(screen.getByTestId("main")).toBeVisible();
   });
+  it("the searchbar should be visible  ", () => {
+    render(<App />);
+    expect(screen.getByTestId("searchbar")).toBeVisible();
+  });
+  it("the searchbar should filter by name   ", () => {
+    render(<App />);
+    userEvent.type(screen.getByTestId("searchbar"), "saeid");
+    expect(screen.getByTestId("main")).toHaveTextContent("saeid");
+  });
 });

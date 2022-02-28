@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from "react";
 import Inner from "./Inner";
 import { useGetAllBreeds } from "./useGetAllBreeds";
+import search from "./search";
+import filterPosts from "./Inner";
 
 const App = () => {
   const [selectedBreed, setSelectedBreed] = useState(null);
-  const allBreeds = useGetAllBreeds();
+  // const allBreeds = useGetAllBreeds();
 
-  useEffect(() => {
-    document.title = selectedBreed;
-  }, [selectedBreed]);
+  // useEffect(() => {
+  //   document.title = selectedBreed;
+  // }, [selectedBreed]);
 
-  if (!allBreeds)
-    return (
-      <div data-testid="main">
-        <div data-testid="loading-state">loading</div>
-      </div>
-    );
+  // if (!allBreeds)
+  //   return (
+  //     <div data-testid="main">
+  //       <div data-testid="loading-state">loading</div>
+  //     </div>
+  //   );
 
   return (
-    <Inner
-      allBreeds={allBreeds}
-      selectedBreed={selectedBreed}
-      setSelectedBreed={setSelectedBreed}
-    />
+    <div>
+      <Inner
+        // allBreeds={allBreeds}
+        selectedBreed={selectedBreed}
+        setSelectedBreed={setSelectedBreed}
+      />
+    </div>
   );
 };
 
